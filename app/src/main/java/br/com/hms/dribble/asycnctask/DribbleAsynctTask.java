@@ -5,41 +5,49 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 
+import br.com.hms.dribble.DribbleFragment;
 import br.com.hms.dribble.dto.RetornoShot;
-import br.com.hms.dribble.dto.Shot;
+import br.com.hms.dribble.interfaces.DribbleObserver;
 import br.com.hms.dribble.rest.DribbleRest;
-import br.com.hms.dribble.util.DribbleUtils;
 
 /**
  * Created by hamseshenrique on 07/07/15.
  */
-public class DribbleAsynctTask  extends AsyncTask<Void, Boolean, Boolean>{
+public class DribbleAsynctTask  extends AsyncTask<Integer, RetornoShot, RetornoShot>{
 
-    private Integer pagina;
+    private DribbleObserver dribbleObserver;
 
-    public DribbleAsynctTask(final Integer pagina){
-        this.pagina = pagina;
+    /**
+     *
+     * @param dribbleFragment
+     */
+    public DribbleAsynctTask(final DribbleFragment dribbleFragment){
+        this.dribbleObserver = dribbleFragment;
     }
 
     @Override
-    protected Boolean doInBackground(final Void... params) {
-        Boolean retorno = Boolean.FALSE;
+    protected RetornoShot doInBackground(final Integer... pagina) {
+        RetornoShot retorno = null;
         try{
-            final String json = DribbleRest.consultarDrible(this.pagina);
+            final String json = DribbleRest.consultarDrible(pagina[0]);
 
             if(!TextUtils.isEmpty(json)){
 
                 Gson gson = new Gson();
                 final RetornoShot retornoShot = gson.fromJson(json, RetornoShot.class);
 
-
-
+                retorno = retornoShot;
             }
 
         }catch(Exception ex){
-
+            ex.printStackTrace();
         }
 
-        return null;
+        return retorno;
+    }
+
+    @Override
+    protected void onPostExecute(final RetornoShot retornoShot) {
+        dribbleObserver.updateDrible(retornoShot);
     }
 }

@@ -9,13 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import br.com.hms.dribble.adapters.DribbleAdapter;
+import br.com.hms.dribble.asycnctask.DribbleAsynctTask;
+import br.com.hms.dribble.dto.RetornoShot;
+import br.com.hms.dribble.interfaces.DribbleObserver;
+
 /**
  * Created by hamseshenrique on 06/07/15.
  */
-public class DribbleFragment extends Fragment{
+public class DribbleFragment extends Fragment implements DribbleObserver{
 
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
+    private static final Integer PAGINA_INICIAL = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,6 +34,25 @@ public class DribbleFragment extends Fragment{
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
+        new DribbleAsynctTask(this).execute(PAGINA_INICIAL);
+
         return rootView;
+    }
+
+
+    @Override
+    public void updateDrible(Object object) {
+        if(object instanceof RetornoShot){
+
+            final RetornoShot retornoShot = (RetornoShot) object;
+            if(retornoShot != null
+                    && retornoShot.getShots() != null
+                    && !retornoShot.getShots().isEmpty()){
+
+                recyclerView.setAdapter(new DribbleAdapter(this.getActivity(),retornoShot.getShots()));
+            }
+        }
+
+        this.progressBar.setVisibility(View.GONE);
     }
 }

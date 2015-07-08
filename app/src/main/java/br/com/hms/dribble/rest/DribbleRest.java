@@ -33,7 +33,7 @@ public class DribbleRest {
     private static String consultar(final String http) throws Exception{
 
         final URL url = new URL(http);
-        final HttpURLConnection httpURLConnection = (HttpURLConnection) url.getContent();
+        final HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         String retorno = "";
 
         if(httpURLConnection.getResponseCode() == CONNECT_OK.intValue()){
