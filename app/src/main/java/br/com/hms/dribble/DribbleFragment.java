@@ -37,6 +37,7 @@ public class DribbleFragment extends Fragment implements DribbleObserver{
         View rootView = inflater.inflate(R.layout.fragment_dribble, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycle);
         recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+
         listShots = new ArrayList<Shot>();
         dribbleFragment = this;
 

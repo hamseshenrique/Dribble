@@ -14,6 +14,7 @@ import java.util.List;
 
 import br.com.hms.dribble.R;
 import br.com.hms.dribble.dto.Shot;
+import br.com.hms.dribble.transform.ImageTransForm;
 import br.com.hms.dribble.viewholders.DribbleViewHolder;
 
 /**
@@ -45,14 +46,19 @@ public class DribbleAdapter extends RecyclerView.Adapter<DribbleViewHolder>{
         final Shot shot = listShots.get(position);
 
         Picasso.with(this.context).load(shot.getImage_url())
-                .error(R.drawable.ic_launcher)
-                .placeholder(R.drawable.ic_launcher)
+                .error(android.R.drawable.stat_notify_error)
+                .placeholder(android.R.drawable.ic_popup_sync)
                 .into(holder.getImageView());
 
-        if(!TextUtils.isEmpty(shot.getDescription())){
-            holder.getTextView().setText(Html.fromHtml(shot.getDescription()));
-        }
+        Picasso.with(this.context).load(shot.getImage_url())
+                .transform(new ImageTransForm())
+                .error(android.R.drawable.stat_notify_error)
+                .placeholder(android.R.drawable.ic_popup_sync)
+                .into(holder.getAvatar());
 
+        holder.getTextTitle().setText(shot.getTitle());
+//        holder.
+//        holder.getTextComentario().setText(shot.getComments_count().toString());
     }
 
     @Override
