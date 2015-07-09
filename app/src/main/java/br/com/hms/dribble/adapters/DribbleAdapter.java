@@ -44,7 +44,7 @@ public class DribbleAdapter extends RecyclerView.Adapter<DribbleViewHolder>{
 
         final Shot shot = listShots.get(position);
 
-        Picasso.with(this.context).load(shot.getImage_teaser_url())
+        Picasso.with(this.context).load(shot.getImage_url())
                 .error(R.drawable.ic_launcher)
                 .placeholder(R.drawable.ic_launcher)
                 .into(holder.getImageView());

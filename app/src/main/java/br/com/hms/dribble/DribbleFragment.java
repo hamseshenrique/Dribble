@@ -9,9 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.hms.dribble.adapters.DribbleAdapter;
 import br.com.hms.dribble.asycnctask.DribbleAsynctTask;
 import br.com.hms.dribble.dto.RetornoShot;
+import br.com.hms.dribble.dto.Shot;
 import br.com.hms.dribble.interfaces.DribbleObserver;
 
 /**
@@ -21,7 +25,10 @@ public class DribbleFragment extends Fragment implements DribbleObserver{
 
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
-    private static final Integer PAGINA_INICIAL = 1;
+    private Integer PAGINA_INICIAL = 1;
+    private List<Shot> listShots;
+    private DribbleFragment dribbleFragment;
+    private DribbleAdapter dribbleAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,6 +37,19 @@ public class DribbleFragment extends Fragment implements DribbleObserver{
         View rootView = inflater.inflate(R.layout.fragment_dribble, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycle);
         recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+        listShots = new ArrayList<Shot>();
+        dribbleFragment = this;
+
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if(!recyclerView.canScrollVertically(1)){
+                   new DribbleAsynctTask(dribbleFragment).execute(PAGINA_INICIAL++);
+                }
+            }
+        });
 
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -49,7 +69,14 @@ public class DribbleFragment extends Fragment implements DribbleObserver{
                     && retornoShot.getShots() != null
                     && !retornoShot.getShots().isEmpty()){
 
-                recyclerView.setAdapter(new DribbleAdapter(this.getActivity(),retornoShot.getShots()));
+                if(listShots.isEmpty()){
+                    listShots.addAll(retornoShot.getShots());
+                    dribbleAdapter = new DribbleAdapter(this.getActivity(),listShots);
+                    recyclerView.setAdapter(dribbleAdapter);
+                }else{
+                    listShots.addAll(retornoShot.getShots());
+                    dribbleAdapter.notifyDataSetChanged();
+                }
             }
         }
 
