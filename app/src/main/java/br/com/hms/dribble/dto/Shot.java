@@ -162,4 +162,21 @@ public class Shot {
     public void setCreated_at(Date created_at) {
         this.created_at = created_at;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Shot shot = (Shot) o;
+
+        if (!id.equals(shot.id)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
+    }
 }

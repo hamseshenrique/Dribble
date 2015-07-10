@@ -13,21 +13,23 @@ import br.com.hms.dribble.R;
 public class DribbleViewHolder extends RecyclerView.ViewHolder{
 
     private ImageView imageView;
-    private TextView textView;
     private ImageView avatar;
     private TextView textTitle;
     private ImageView imageComentario;
     private TextView textComentario;
+    private TextView textVisualizacoes;
+    private TextView textCurtidas;
 
     public DribbleViewHolder(View view){
         super(view);
 
         this.imageView = (ImageView)view.findViewById(R.id.imageView);
-        this.textView = (TextView)view.findViewById(R.id.textView);
         this.avatar = (ImageView)view.findViewById(R.id.avatar);
         this.textTitle = (TextView)view.findViewById(R.id.title);
         this.textComentario = (TextView)view.findViewById(R.id.textComentario);
         this.imageComentario = (ImageView)view.findViewById(R.id.imageComentario);
+        this.textVisualizacoes = (TextView)view.findViewById(R.id.textVisualizacoes);
+        this.textCurtidas = (TextView)view.findViewById(R.id.textCurtidas);
     }
 
     public ImageView getImageView() {
@@ -36,14 +38,6 @@ public class DribbleViewHolder extends RecyclerView.ViewHolder{
 
     public void setImageView(ImageView imageView) {
         this.imageView = imageView;
-    }
-
-    public TextView getTextView() {
-        return textView;
-    }
-
-    public void setTextView(TextView textView) {
-        this.textView = textView;
     }
 
     public ImageView getAvatar() {
@@ -76,5 +70,21 @@ public class DribbleViewHolder extends RecyclerView.ViewHolder{
 
     public void setTextComentario(TextView textComentario) {
         this.textComentario = textComentario;
+    }
+
+    public TextView getTextVisualizacoes() {
+        return textVisualizacoes;
+    }
+
+    public void setTextVisualizacoes(TextView textVisualizacoes) {
+        this.textVisualizacoes = textVisualizacoes;
+    }
+
+    public TextView getTextCurtidas() {
+        return textCurtidas;
+    }
+
+    public void setTextCurtidas(TextView textCurtidas) {
+        this.textCurtidas = textCurtidas;
     }
 }

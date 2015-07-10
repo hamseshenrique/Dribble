@@ -61,10 +61,6 @@ public class DribbleAdapter extends RecyclerView.Adapter<DribbleViewHolder>{
                 .placeholder(android.R.drawable.ic_popup_sync)
                 .into(holder.getImageView());
 
-        if(!TextUtils.isEmpty(shot.getDescription())){
-            holder.getTextView().setText(Html.fromHtml(shot.getDescription()));
-        }
-
         Picasso.with(this.context).load(shot.getImage_url())
                 .transform(new ImageTransForm())
                 .error(android.R.drawable.stat_notify_error)
@@ -75,6 +71,14 @@ public class DribbleAdapter extends RecyclerView.Adapter<DribbleViewHolder>{
 
         if(shot.getComments_count() != null){
             holder.getTextComentario().setText(shot.getComments_count().toString());
+        }
+
+        if(shot.getLikes_count() != null){
+            holder.getTextCurtidas().setText(shot.getLikes_count().toString());
+        }
+
+        if(shot.getViews_count() != null){
+            holder.getTextVisualizacoes().setText(shot.getViews_count().toString());
         }
     }
 
