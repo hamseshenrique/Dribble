@@ -1,6 +1,7 @@
 package br.com.hms.dribble.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
@@ -12,6 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import br.com.hms.dribble.DribbleDetailActivity;
 import br.com.hms.dribble.R;
 import br.com.hms.dribble.dto.Shot;
 import br.com.hms.dribble.transform.ImageTransForm;
@@ -45,10 +47,23 @@ public class DribbleAdapter extends RecyclerView.Adapter<DribbleViewHolder>{
 
         final Shot shot = listShots.get(position);
 
+        holder.getImageView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Intent detail = new Intent(context,DribbleDetailActivity.class);
+                detail.putExtra("idDetail",shot.getId());
+                context.startActivity(detail);
+            }
+        });
+
         Picasso.with(this.context).load(shot.getImage_url())
                 .error(android.R.drawable.stat_notify_error)
                 .placeholder(android.R.drawable.ic_popup_sync)
                 .into(holder.getImageView());
+
+        if(!TextUtils.isEmpty(shot.getDescription())){
+            holder.getTextView().setText(Html.fromHtml(shot.getDescription()));
+        }
 
         Picasso.with(this.context).load(shot.getImage_url())
                 .transform(new ImageTransForm())
@@ -57,8 +72,10 @@ public class DribbleAdapter extends RecyclerView.Adapter<DribbleViewHolder>{
                 .into(holder.getAvatar());
 
         holder.getTextTitle().setText(shot.getTitle());
-//        holder.
-//        holder.getTextComentario().setText(shot.getComments_count().toString());
+
+        if(shot.getComments_count() != null){
+            holder.getTextComentario().setText(shot.getComments_count().toString());
+        }
     }
 
     @Override

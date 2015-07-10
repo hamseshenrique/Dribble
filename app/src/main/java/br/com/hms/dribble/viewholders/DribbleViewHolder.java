@@ -23,6 +23,7 @@ public class DribbleViewHolder extends RecyclerView.ViewHolder{
         super(view);
 
         this.imageView = (ImageView)view.findViewById(R.id.imageView);
+        this.textView = (TextView)view.findViewById(R.id.textView);
         this.avatar = (ImageView)view.findViewById(R.id.avatar);
         this.textTitle = (TextView)view.findViewById(R.id.title);
         this.textComentario = (TextView)view.findViewById(R.id.textComentario);

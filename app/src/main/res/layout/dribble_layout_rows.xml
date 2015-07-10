@@ -32,24 +32,35 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="200dp"
             android:layout_gravity="top"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"/>
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="right">
 
             <ImageView
                 android:id="@+id/imageComentario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"/>
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/comentarios"
+                android:layout_margin="5dp"/>
 
             <TextView
                 android:id="@+id/textComentario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"/>
+                android:gravity="right"
+                android:layout_margin="10dp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 

@@ -13,7 +13,7 @@ import br.com.hms.dribble.rest.DribbleRest;
 /**
  * Created by hamseshenrique on 07/07/15.
  */
-public class DribbleAsynctTask  extends AsyncTask<Integer, RetornoShot, RetornoShot>{
+public class DribbleAsynctTask extends AsyncTask<Integer, RetornoShot, RetornoShot>{
 
     private DribbleObserver dribbleObserver;
 
@@ -32,11 +32,8 @@ public class DribbleAsynctTask  extends AsyncTask<Integer, RetornoShot, RetornoS
             final String json = DribbleRest.consultarDrible(pagina[0]);
 
             if(!TextUtils.isEmpty(json)){
-
-                Gson gson = new Gson();
-                final RetornoShot retornoShot = gson.fromJson(json, RetornoShot.class);
-
-                retorno = retornoShot;
+                final Gson gson = new Gson();
+                retorno = gson.fromJson(json, RetornoShot.class);
             }
 
         }catch(Exception ex){

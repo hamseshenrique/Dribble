@@ -13,6 +13,7 @@ public class DribbleRest {
 
     private static final Integer CONNECT_OK = 200;
     private static final String LIST_DRIBBLE = "http://api.dribbble.com/shots/popular?page={0}";
+    private static final String LIST_DRIBBLE_DETAIL = "http://api.dribbble.com/shots/{0}";
 
     /**
      *
@@ -22,6 +23,16 @@ public class DribbleRest {
      */
     public static String consultarDrible(final Integer page) throws Exception {
         return consultar(MessageFormat.format(LIST_DRIBBLE,page));
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public static String consultarDribbleDetail(final Integer id) throws Exception {
+        return consultar(MessageFormat.format(LIST_DRIBBLE_DETAIL,id.toString()));
     }
 
     /**
