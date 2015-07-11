@@ -2,8 +2,7 @@
 <resources>
 
     <string name="app_name">Dribble</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_dribble_detail">DribbleDetailActivity</string>
+    <string name="falha">Falha na Conexão com a Intertent</string>
+    <string name="tenteNovamente">Tente Novamente</string>
 
 </resources>

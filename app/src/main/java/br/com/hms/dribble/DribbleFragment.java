@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import br.com.hms.dribble.asycnctask.DribbleAsynctTask;
 import br.com.hms.dribble.dto.RetornoShot;
 import br.com.hms.dribble.dto.Shot;
 import br.com.hms.dribble.interfaces.DribbleObserver;
+import br.com.hms.dribble.util.DribbleUtils;
 
 /**
  * Created by hamseshenrique on 06/07/15.
@@ -29,12 +32,24 @@ public class DribbleFragment extends Fragment implements DribbleObserver{
     private List<Shot> listShots;
     private DribbleFragment dribbleFragment;
     private DribbleAdapter dribbleAdapter;
+    private LinearLayout linearError;
+    private Button btnTenteNovamente;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_dribble, container, false);
+        carregarTela(rootView);
+
+        return rootView;
+    }
+
+    /**
+     *
+     * @param rootView
+     */
+    private void carregarTela(final View rootView) {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycle);
         recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
 
@@ -54,10 +69,23 @@ public class DribbleFragment extends Fragment implements DribbleObserver{
 
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
+        linearError = (LinearLayout) rootView.findViewById(R.id.linearError);
+        btnTenteNovamente = (Button) rootView.findViewById(R.id.tenteNovamente);
 
-        new DribbleAsynctTask(this).execute(PAGINA_INICIAL);
-
-        return rootView;
+        if(DribbleUtils.existeConexao(this.getActivity().getApplicationContext())){
+            new DribbleAsynctTask(this).execute(PAGINA_INICIAL);
+        }else{
+            progressBar.setVisibility(View.GONE);
+            linearError.setVisibility(View.VISIBLE);
+            btnTenteNovamente.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    linearError.setVisibility(View.GONE);
+                    carregarTela(rootView);
+                }
+            });
+        }
     }
 
 

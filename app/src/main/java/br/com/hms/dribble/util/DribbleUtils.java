@@ -1,5 +1,9 @@
 package br.com.hms.dribble.util;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,4 +33,22 @@ public class DribbleUtils {
 
         return total.toString();
     }
+
+    public static Boolean existeConexao(final Context context){
+        Boolean isConexao = Boolean.FALSE;
+        try{
+            final ConnectivityManager cm = (ConnectivityManager) context.getSystemService(
+                    Context.CONNECTIVITY_SERVICE);
+
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
+            isConexao = netInfo != null && netInfo.isConnectedOrConnecting()
+                    && netInfo.isAvailable();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+
+        return isConexao;
+    }
+
 }
