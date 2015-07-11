@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -30,6 +32,7 @@ public class DribbleDetailFragment extends Fragment implements DribbleObserver{
     private ImageView imageViewDetail;
     private TextView textTileDetail;
     private Context context;
+    private ProgressBar progressBarDetail;
 
 
     public DribbleDetailFragment(){
@@ -47,6 +50,7 @@ public class DribbleDetailFragment extends Fragment implements DribbleObserver{
         textNome = (TextView) rootView.findViewById(R.id.textNome);
         imageViewDetail = (ImageView) rootView.findViewById(R.id.imageViewDetail);
         textTileDetail = (TextView) rootView.findViewById(R.id.textTitleDetail);
+        progressBarDetail = (ProgressBar) rootView.findViewById(R.id.progressBarDetail);
 
         final Bundle bundle = this.getArguments();
 
@@ -61,6 +65,8 @@ public class DribbleDetailFragment extends Fragment implements DribbleObserver{
     public void updateDrible(Object object) {
 
         if(object instanceof Shot){
+            progressBarDetail.setVisibility(View.GONE);
+
             final Shot shot = (Shot) object;
 
             if(shot != null){
