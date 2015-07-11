@@ -57,6 +57,13 @@
             android:gravity="right|center">
 
             <ImageView
+                android:id="@+id/imageCompartilhar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:layout_marginRight="15dp"/>
+
+            <ImageView
                 android:id="@+id/imageVisualizacoes"
                 android:layout_width="30dp"
                 android:layout_height="30dp"

@@ -1,5 +1,6 @@
 package br.com.hms.dribble.viewholders;
 
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ public class DribbleViewHolder extends RecyclerView.ViewHolder{
     private TextView textComentario;
     private TextView textVisualizacoes;
     private TextView textCurtidas;
+    private ImageView imageCompartilhar;
 
     public DribbleViewHolder(View view){
         super(view);
@@ -30,6 +32,7 @@ public class DribbleViewHolder extends RecyclerView.ViewHolder{
         this.imageComentario = (ImageView)view.findViewById(R.id.imageComentario);
         this.textVisualizacoes = (TextView)view.findViewById(R.id.textVisualizacoes);
         this.textCurtidas = (TextView)view.findViewById(R.id.textCurtidas);
+        this.imageCompartilhar = (ImageView)view.findViewById(R.id.imageCompartilhar);
     }
 
     public ImageView getImageView() {
@@ -86,5 +89,13 @@ public class DribbleViewHolder extends RecyclerView.ViewHolder{
 
     public void setTextCurtidas(TextView textCurtidas) {
         this.textCurtidas = textCurtidas;
+    }
+
+    public ImageView getImageCompartilhar() {
+        return imageCompartilhar;
+    }
+
+    public void setImageCompartilhar(ImageView imageCompartilhar) {
+        this.imageCompartilhar = imageCompartilhar;
     }
 }

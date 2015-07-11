@@ -51,7 +51,7 @@ public class DribbleAdapter extends RecyclerView.Adapter<DribbleViewHolder>{
             @Override
             public void onClick(View view) {
                 final Intent detail = new Intent(context,DribbleDetailActivity.class);
-                detail.putExtra("idDetail",shot.getId());
+                detail.putExtra("idDetail", shot.getId());
                 context.startActivity(detail);
             }
         });
@@ -80,6 +80,17 @@ public class DribbleAdapter extends RecyclerView.Adapter<DribbleViewHolder>{
         if(shot.getViews_count() != null){
             holder.getTextVisualizacoes().setText(shot.getViews_count().toString());
         }
+
+        holder.getImageCompartilhar().setImageResource(android.R.drawable.ic_menu_share);
+        holder.getImageCompartilhar().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT,shot.getShort_url());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
