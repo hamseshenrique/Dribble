@@ -7,4 +7,10 @@
 
     <color name="corFundo">#E0E0E0</color>
 
+    <style name="divider">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/corFundo</item>
+    </style>
+
 </resources>
